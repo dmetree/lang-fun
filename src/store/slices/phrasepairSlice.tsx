@@ -16,7 +16,6 @@ export const phrasepairSlice = createSlice({
   name: 'phrase_pair',
   initialState,
   reducers: {
-   
     saveInput: (state, action: PayloadAction<string>) => {
       state.input = action.payload;
     },

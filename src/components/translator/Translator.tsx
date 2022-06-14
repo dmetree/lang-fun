@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import axios from 'axios'
+import { saveInput, saveTranslation  } from '../../store/slices/phrasepairSlice'
 
 function Translator() {
-
+  const dispatch = useAppDispatch();
+  
   const [url_lang_to, setUrlLang] = useState('tr')
   const [translation, setTranslation] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -29,6 +32,8 @@ function Translator() {
 
   const handleSave = () => {
     console.log('Saving...')
+    dispatch(saveInput(inputValue))
+    dispatch(saveTranslation(translation))
   }
 
   const handleClean = () => {

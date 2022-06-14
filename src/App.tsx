@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Counter } from './components/counter/Counter';
 import Translator from './components/translator/Translator';
 import './App.css';

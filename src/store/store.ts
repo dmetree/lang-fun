@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from './slices/counterSlice';
+import phrasePairReducer from './slices/phrasepairSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    phrase_pair: phrasePairReducer,
   },
 });
 

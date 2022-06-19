@@ -4,10 +4,13 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import './App.css';
 import { Counter } from './components/counter/Counter';
 import Translator from './components/translator/Translator';
-import './App.css';
 import Navigation from './components/navigation/Navigation';
+import Registration from './pages/register/Registration';
+import Login from './pages/login/Login';
+
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Translator/>} />
         <Route path="/counter" element={<Counter />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
+
       </Routes> 
     </div>
   );

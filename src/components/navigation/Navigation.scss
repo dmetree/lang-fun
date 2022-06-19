@@ -1,0 +1,16 @@
+.nav-bar {
+    padding: 0 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+}
+
+.nav-item {
+    margin: 5px 10px;
+    padding: 5px 10px;
+    border: 1px solid lightgrey;
+}

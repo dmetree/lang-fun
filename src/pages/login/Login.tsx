@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
+import { useLogin } from '../../hooks/useLogin'
 import './Login.scss'
 
 function Login() {
+  const { login,  error, isPending } = useLogin()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -9,6 +11,7 @@ function Login() {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     console.log(email, password)
+    login(email, password)
   }
 
   return (
@@ -32,7 +35,9 @@ function Login() {
         />
       </label>
 
-      <button>Войти</button>
+      {!isPending && <button>Войти</button>}
+      {isPending && <button disabled>Вхожу...</button>}
+      {error && <p>{error}</p>}
 
     </form>
   )

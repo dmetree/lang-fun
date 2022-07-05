@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
+import { useRegister } from '../../hooks/useRegister'
+import { saveUserAuth } from '../../store/slices/authSlice'
 import './Registration.scss'
+
 
 function Registration() {
   
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [password2, setPassword2] = useState('')
+  const [displayName, setDisplayName] = useState('')
+  const { register, error, isPending } = useRegister()
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    console.log(email, password, password2)
+    register(email, password, displayName)
+    saveUserAuth('got it!') 
   }
 
   return (
@@ -34,16 +39,17 @@ function Registration() {
       </label>
 
       <label className="form-label">
-        <span>password once again</span>
+        <span>Имя</span>
         <input 
-          type="password" 
-          value={password2}
-          onChange={(e) => setPassword2(e.target.value)}
+          type="text" 
+          value={displayName}
+          onChange={(e) => setDisplayName(e.target.value)}
         />
       </label>
 
-      <button>Создать</button>
-
+      {!isPending && <button>Создать</button>}
+      {isPending && <button disabled>Loading...</button>}
+      { error && <p>{error}</p>}
     </form>
   )
 }

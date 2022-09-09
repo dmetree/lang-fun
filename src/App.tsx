@@ -13,6 +13,7 @@ import Registration from './pages/register/Registration';
 import Login from './pages/login/Login';
 import { useAppSelector, useAppDispatch } from '../src/store/hooks';
 import PrivateRoute from './components/navigation/PrivateRoute';
+import FreePhrases from './components/free_phrases/FreePhrases';
 
 {/* <Routes>
  <Route path='/' element={<Home />} />
@@ -46,6 +47,7 @@ function App() {
       <Navigation/>
       <Routes>
         <Route path="/" element={<Translator/>} />
+        <Route path="/phrases" element={<FreePhrases/>}/>
 
         {/* Protected Route in ReactRouterDom 6.0.1 */}
         <Route path="/counter" 

@@ -1,20 +1,22 @@
 import React, {useState} from 'react'
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../store/hooks'
 import axios from 'axios'
+import { useId } from "react";
 import { saveInput, saveTranslation  } from '../../store/slices/phrasepairSlice'
+import './Translator.scss'
 
 function Translator() {
   const dispatch = useAppDispatch();
   
-  const [url_lang_to, setUrlLang] = useState('tr')
+  const [lang_to, setUrlLang] = useState('tr')
+  const [lang_from, setLangFrom] = useState('en')
   const [translation, setTranslation] = useState('');
   const [inputValue, setInputValue] = useState('');
 
   const url_prefix = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=';
-  const url_lang_from = 'en';
   const url_lang_connector = '&tl=';
   const url_lang_to_phrase_connecor = '&dt=t&q='
-  const url = url_prefix + url_lang_from + url_lang_connector + url_lang_to + url_lang_to_phrase_connecor + inputValue;
+  const url = url_prefix + lang_from + url_lang_connector + lang_to + url_lang_to_phrase_connecor + inputValue;
 
 
   async function getTranslation() {
@@ -30,10 +32,18 @@ function Translator() {
     getTranslation();    
   }
 
+  // Saving to DB
+  // const handleSave = () => {
+  //   console.log('Saving to FireB...')
+  //   dispatch(saveInput(inputValue))
+  //   dispatch(saveTranslation(translation))
+  // }
+  
+  // Saving to LocalStorage
+
   const handleSave = () => {
-    console.log('Saving...')
-    dispatch(saveInput(inputValue))
-    dispatch(saveTranslation(translation))
+    console.log('Saving to LocalStorage...')
+    localStorage.setItem(inputValue, translation);
   }
 
   const handleClean = () => {
@@ -44,11 +54,12 @@ function Translator() {
   
   return (
     <div>
-      <h3>In {url_lang_to} that would be: </h3>
-      <h2>{translation}</h2>
-      <label>Enter phrase in English</label>
+      <h3>In {lang_to} that would be: </h3>
+      <div className='lang_output'>{translation}</div>
+      <label>Enter phrase in {lang_from}</label>
       <br/>
       <input
+        className='lang_input'
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
